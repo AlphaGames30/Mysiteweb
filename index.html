@@ -181,6 +181,73 @@ function changeMusic() {
   audio.play();
 }
 
+let scrollCount = 0;
+let scrollTimer;
+
+window.addEventListener("wheel", () => {
+  scrollCount++;
+  clearTimeout(scrollTimer);
+
+  scrollTimer = setTimeout(() => scrollCount = 0, 500);
+
+  if (scrollCount >= 3) {
+    document.body.style.filter = "blur(4px)";
+    setTimeout(() => document.body.style.filter = "", 800);
+    scrollCount = 0;
+  }
+});
+
+let taps = 0;
+let tapTimer;
+
+document.body.addEventListener("touchstart", () => {
+  taps++;
+  clearTimeout(tapTimer);
+
+  tapTimer = setTimeout(() => taps = 0, 600);
+
+  if (taps === 3) {
+    if (navigator.vibrate) navigator.vibrate(200);
+    document.body.style.backgroundColor = "#fff";
+    setTimeout(() => document.body.style.backgroundColor = "", 150);
+    taps = 0;
+  }
+});
+
+let idleTimer;
+
+document.addEventListener("mousemove", () => {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    console.log("👁️ Je te vois.");
+  }, 5000);
+});
+
+let godMode = 0;
+
+function unlockGodMode() {
+  godMode++;
+  if (godMode === 3) {
+    alert("🔥 MODE DIEU ACTIVÉ 🔥");
+    document.body.style.animation = "rainbow 3s linear infinite";
+  }
+}
+
+const secretWord = ["a","l","p","h","a"];
+let wordIndex = 0;
+
+document.addEventListener("keydown", e => {
+  if (e.key.toLowerCase() === secretWord[wordIndex]) {
+    wordIndex++;
+    if (wordIndex === secretWord.length) {
+      document.body.style.boxShadow = "inset 0 0 200px #a855ff";
+      wordIndex = 0;
+    }
+  } else {
+    wordIndex = 0;
+  }
+});
+  
 /* ===== VUES 24H ===== */
 const now = Date.now();
 const lastVisit = localStorage.getItem("last_visit");

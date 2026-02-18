@@ -14,6 +14,12 @@ body {
   display: flex;
   justify-content: center;
   padding: 20px;
+  animation: pulseBg 6s infinite alternate;
+}
+
+@keyframes pulseBg {
+  from { background: radial-gradient(circle at top, #6a00ff, #000); }
+  to   { background: radial-gradient(circle at top, #a855ff, #000); }
 }
 
 .container {
@@ -33,7 +39,7 @@ body {
 
 h1 {
   margin: 10px 0 5px;
-  text-shadow: 0 0 15px #a855ff;
+  text-shadow: 0 0 20px #a855ff;
 }
 
 p {
@@ -49,7 +55,7 @@ p {
   color: white;
   text-decoration: none;
   display: block;
-  transition: 0.15s;
+  transition: 0.2s;
 }
 
 .link:hover {
@@ -64,8 +70,8 @@ button {
   padding: 8px 14px;
   color: white;
   cursor: pointer;
-  margin-top: 8px;
-  box-shadow: 0 0 10px #7f00ff;
+  margin: 6px;
+  box-shadow: 0 0 12px #7f00ff;
 }
 
 button:hover {
@@ -82,6 +88,7 @@ button:hover {
   right: 15px;
   font-size: 13px;
   opacity: 0.85;
+  text-shadow: 0 0 10px #a855ff;
 }
 </style>
 </head>
@@ -98,38 +105,14 @@ button:hover {
     <button onclick="changeMusic()">🔁 Changer</button>
   </div>
 
-  <!-- 🔗 TES LIENS -->
-  <a class="link" href="https://youtube.com/@alpha_roblox-v6o?si=akPvJJR0dHIpiiTi" target="_blank">
-    🎥 YouTube — Chaîne Roblox
-  </a>
-
-  <a class="link" href="https://youtube.com/@alpha_fortnite-l5u?si=1E02OfGAw21mn4E9" target="_blank">
-    🎮 YouTube — Chaîne Fortnite
-  </a>
-
-  <a class="link" href="https://youtube.com/@alpha_games30?si=_slgcvNo_UiZhZKO" target="_blank">
-    🕹️ YouTube — Gaming aléatoire
-  </a>
-
-  <a class="link" href="https://www.instagram.com/alpha_game30?igsh=OTMzcG9ueGNhdTEw" target="_blank">
-    📸 Instagram
-  </a>
-
-  <a class="link" href="https://open.spotify.com/user/31k5ajlsqnxhd3glj3bbc5iirq5i?si=iizxRCU9SeS3wqzL4d0mIQ" target="_blank">
-    🎵 Spotify
-  </a>
-
-  <a class="link" href="https://www.tiktok.com/@edonis5911?_r=1&_t=ZG-93x6VX3UYBE" target="_blank">
-    🎶 TikTok
-  </a>
-
-  <a class="link" href="https://discord.gg/DBgCn5MxAQ" target="_blank">
-    💬 Discord (serveur)
-  </a>
-
-  <a class="link" href="mailto:alpha.ytb.contact.me@gmail.com">
-    📨 E-mail : alpha.ytb.contact.me@gmail.com
-  </a>
+  <a class="link" href="https://youtube.com/@alpha_roblox-v6o?si=akPvJJR0dHIpiiTi" target="_blank">🎥 YouTube — Chaîne Roblox</a>
+  <a class="link" href="https://youtube.com/@alpha_fortnite-l5u?si=1E02OfGAw21mn4E9" target="_blank">🎮 YouTube — Chaîne Fortnite</a>
+  <a class="link" href="https://youtube.com/@alpha_games30?si=_slgcvNo_UiZhZKO" target="_blank">🕹️ YouTube — Gaming aléatoire</a>
+  <a class="link" href="https://www.instagram.com/alpha_game30?igsh=OTMzcG9ueGNhdTEw" target="_blank">📸 Instagram</a>
+  <a class="link" href="https://open.spotify.com/user/31k5ajlsqnxhd3glj3bbc5iirq5i?si=iizxRCU9SeS3wqzL4d0mIQ" target="_blank">🎵 Spotify</a>
+  <a class="link" href="https://www.tiktok.com/@edonis5911?_r=1&_t=ZG-93x6VX3UYBE" target="_blank">🎶 TikTok</a>
+  <a class="link" href="https://discord.gg/DBgCn5MxAQ" target="_blank">💬 Discord (serveur)</a>
+  <a class="link" href="mailto:alpha.ytb.contact.me@gmail.com">📨 E-mail : alpha.ytb.contact.me@gmail.com</a>
 
   <div class="info">
     👤 Discord (moi) : <strong>alpha_gaming30</strong><br>
@@ -149,12 +132,13 @@ button:hover {
 <audio id="music" loop></audio>
 
 <script>
+/* ===== COPIE ===== */
 function copyText(text) {
   navigator.clipboard.writeText(text);
   alert("Copié : " + text);
 }
 
-// 🎵 PLAYLIST
+/* ===== MUSIQUE ===== */
 const musics = [
   "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Technology__Innovation/Scott_Holmes_Music_-_Corporate_Innovation.mp3",
   "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Corporate__Motivational_Music/Scott_Holmes_Music_-_Upbeat_Party.mp3"
@@ -163,9 +147,14 @@ const musics = [
 let index = 0;
 const audio = document.getElementById("music");
 audio.src = musics[index];
+audio.volume = 0.5;
 
 function toggleMusic() {
-  audio.paused ? audio.play() : audio.pause();
+  if (audio.paused) {
+    audio.play().catch(() => alert("Clique sur le bouton pour lancer la musique"));
+  } else {
+    audio.pause();
+  }
 }
 
 function changeMusic() {
@@ -174,13 +163,21 @@ function changeMusic() {
   audio.play();
 }
 
-// 👁️ COMPTEUR DE VUES
-let views = localStorage.getItem("alpha_views") || 0;
-views++;
-localStorage.setItem("alpha_views", views);
+/* ===== COMPTEUR DE VUES 24H ===== */
+const now = Date.now();
+const lastVisit = localStorage.getItem("last_visit");
+let views = localStorage.getItem("alpha_views");
+
+views = views ? parseInt(views) : 0;
+
+if (!lastVisit || now - lastVisit > 24 * 60 * 60 * 1000) {
+  views++;
+  localStorage.setItem("alpha_views", views);
+  localStorage.setItem("last_visit", now);
+}
+
 document.getElementById("views").textContent = views;
 </script>
 
 </body>
 </html>
-

@@ -1,112 +1,95 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alpha Gaming - Mes Liens</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Gaming - Mes liens</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #6a00ff, #000);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 20px;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #6a00ff, #000);
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
 
-    .container {
-      width: 100%;
-      max-width: 420px;
-      text-align: center;
-    }
+.container {
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
 
-    .avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: auto;
-      border: 3px solid #a855ff;
-      box-shadow: 0 0 20px #a855ff;
-    }
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #a855ff;
+  box-shadow: 0 0 20px #a855ff;
+  margin-bottom: 10px;
+}
 
-    h1 {
-      margin: 10px 0 5px;
-      text-shadow: 0 0 15px #a855ff;
-    }
+h1 {
+  margin: 10px 0 5px;
+  text-shadow: 0 0 15px #a855ff;
+}
 
-    p {
-      color: #ccc;
-      margin-bottom: 25px;
-    }
+p {
+  color: #ccc;
+  margin-bottom: 20px;
+}
 
-    .link {
-      display: block;
-      background: #1f1f1f;
-      border-radius: 14px;
-      padding: 14px;
-      margin: 10px 0;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      font-size: 16px;
-      box-shadow: 0 0 10px #000;
-    }
+.link, .info {
+  background: #1f1f1f;
+  border-radius: 14px;
+  padding: 14px;
+  margin: 10px 0;
+  color: white;
+  text-decoration: none;
+  display: block;
+  transition: 0.15s;
+}
 
-    .link:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #a855ff;
-      background: #2a2a2a;
-    }
+.link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #a855ff;
+}
 
-    .info {
-      background: #1f1f1f;
-      border-radius: 14px;
-      padding: 14px;
-      margin: 10px 0;
-      box-shadow: 0 0 15px #000;
-    }
+button {
+  background: #7f00ff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  color: white;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 0 10px #7f00ff;
+}
 
-    button {
-      margin-top: 8px;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 10px;
-      background: #7f00ff;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 0 15px #7f00ff;
-    }
+button:hover {
+  background: #a855ff;
+}
 
-    button:hover {
-      background: #a855ff;
-    }
+.music-controls {
+  margin-bottom: 20px;
+}
 
-    /* 🎵 MUSIQUE */
-    .music-controls {
-      margin: 20px 0;
-    }
-
-    /* 👁️ VUES */
-    .views {
-      position: fixed;
-      bottom: 10px;
-      right: 15px;
-      font-size: 13px;
-      opacity: 0.85;
-      text-shadow: 0 0 10px #a855ff;
-    }
-  </style>
+.views {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
-  <img src="https://i.imgur.com/LEoFjmn.jpeg" class="avatar" />
+  <img src="https://i.imgur.com/LEoFjmn.jpeg" class="avatar">
   <h1>Alpha Gaming</h1>
   <p>Mes réseaux et liens officiels</p>
 
@@ -115,137 +98,89 @@
     <button onclick="changeMusic()">🔁 Changer</button>
   </div>
 
-  <a class="link" href="https://youtube.com/@alpha_roblox-v6o" target="_blank">🎥 YouTube — Roblox</a>
-  <a class="link" href="https://youtube.com/@alpha_fortnite-l5u" target="_blank">🎮 YouTube — Fortnite</a>
-  <a class="link" href="https://youtube.com/@alpha_games30" target="_blank">🕹️ YouTube — Gaming</a>
-  <a class="link" href="https://www.instagram.com/alpha_game30" target="_blank">📸 Instagram</a>
-  <a class="link" href="https://open.spotify.com" target="_blank">🎵 Spotify</a>
-  <a class="link" href="https://www.tiktok.com/@edonis5911" target="_blank">🎶 TikTok</a>
-  <a class="link" href="https://discord.gg/DBgCn5MxAQ" target="_blank">💬 Discord</a>
-  <a class="link" href="mailto:alpha.ytb.contact.me@gmail.com">📨 Email</a>
+  <!-- 🔗 TES LIENS -->
+  <a class="link" href="https://youtube.com/@alpha_roblox-v6o?si=akPvJJR0dHIpiiTi" target="_blank">
+    🎥 YouTube — Chaîne Roblox
+  </a>
+
+  <a class="link" href="https://youtube.com/@alpha_fortnite-l5u?si=1E02OfGAw21mn4E9" target="_blank">
+    🎮 YouTube — Chaîne Fortnite
+  </a>
+
+  <a class="link" href="https://youtube.com/@alpha_games30?si=_slgcvNo_UiZhZKO" target="_blank">
+    🕹️ YouTube — Gaming aléatoire
+  </a>
+
+  <a class="link" href="https://www.instagram.com/alpha_game30?igsh=OTMzcG9ueGNhdTEw" target="_blank">
+    📸 Instagram
+  </a>
+
+  <a class="link" href="https://open.spotify.com/user/31k5ajlsqnxhd3glj3bbc5iirq5i?si=iizxRCU9SeS3wqzL4d0mIQ" target="_blank">
+    🎵 Spotify
+  </a>
+
+  <a class="link" href="https://www.tiktok.com/@edonis5911?_r=1&_t=ZG-93x6VX3UYBE" target="_blank">
+    🎶 TikTok
+  </a>
+
+  <a class="link" href="https://discord.gg/DBgCn5MxAQ" target="_blank">
+    💬 Discord (serveur)
+  </a>
+
+  <a class="link" href="mailto:alpha.ytb.contact.me@gmail.com">
+    📨 E-mail : alpha.ytb.contact.me@gmail.com
+  </a>
 
   <div class="info">
-    👤 Discord : alpha_gaming30<br>
+    👤 Discord (moi) : <strong>alpha_gaming30</strong><br>
     <button onclick="copyText('alpha_gaming30')">Copier</button>
   </div>
 
   <div class="info">
-    🎮 Pokémon GO : 663406890740<br>
+    🎮 Pokémon GO : <strong>663406890740</strong><br>
     <button onclick="copyText('663406890740')">Copier</button>
   </div>
 </div>
 
 <div class="views">
-  👁️ Vues : <span id="viewsCount"></span>
+  👁️ Vues : <span id="views"></span>
 </div>
 
 <audio id="music" loop></audio>
 
 <script>
-  function copyText(text) {
-    navigator.clipboard.writeText(text);
-    alert("Copié : " + text);
-  }
+function copyText(text) {
+  navigator.clipboard.writeText(text);
+  alert("Copié : " + text);
+}
 
-  // 🎵 PLAYLIST
-  const musics = [
-    "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Technology__Innovation/Scott_Holmes_Music_-_Corporate_Innovation.mp3",
-    "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Corporate__Motivational_Music/Scott_Holmes_Music_-_Upbeat_Party.mp3"
-  ];
+// 🎵 PLAYLIST
+const musics = [
+  "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Technology__Innovation/Scott_Holmes_Music_-_Corporate_Innovation.mp3",
+  "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Corporate__Motivational_Music/Scott_Holmes_Music_-_Upbeat_Party.mp3"
+];
 
-  let index = 0;
-  const audio = document.getElementById("music");
+let index = 0;
+const audio = document.getElementById("music");
+audio.src = musics[index];
+
+function toggleMusic() {
+  audio.paused ? audio.play() : audio.pause();
+}
+
+function changeMusic() {
+  index = (index + 1) % musics.length;
   audio.src = musics[index];
+  audio.play();
+}
 
-  function toggleMusic() {
-    audio.paused ? audio.play() : audio.pause();
-  }
-
-  function changeMusic() {
-    index = (index + 1) % musics.length;
-    audio.src = musics[index];
-    audio.play();
-  }
-
-  // 👁️ COMPTEUR DE VUES
-  let views = localStorage.getItem("alpha_views");
-  views = views ? parseInt(views) + 1 : 1;
-  localStorage.setItem("alpha_views", views);
-  document.getElementById("viewsCount").textContent = views;
+// 👁️ COMPTEUR DE VUES
+let views = localStorage.getItem("alpha_views") || 0;
+views++;
+localStorage.setItem("alpha_views", views);
+document.getElementById("views").textContent = views;
 </script>
 
 </body>
 </html>
 
-    .link {
-      display: block;
-      background: #1f1f1f;
-      border-radius: 14px;
-      padding: 14px;
-      margin: 10px 0;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.15s ease, background 0.15s ease;
-      word-break: break-word;
-      font-size: 16px;
-    }
-
-    .link:hover {
-      transform: scale(1.04);
-      background: #2a2a2a;
-    }
-
-    .info {
-      background: #1f1f1f;
-      border-radius: 14px;
-      padding: 14px;
-      margin: 10px 0;
-    }
-
-    button {
-      margin-top: 8px;
-      padding: 6px 10px;
-      border: none;
-      border-radius: 8px;
-      background: #444;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover { background: #666; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <img src="https://i.imgur.com/LEoFjmn.jpeg" alt="Photo de profil" class="avatar" />
-    <h1>Alpha Gaming</h1>
-    <p>Mes réseaux et liens officiels</p>
-
-    <a class="link" href="https://youtube.com/@alpha_roblox-v6o?si=akPvJJR0dHIpiiTi" target="_blank">🎥 YouTube — Chaîne Roblox</a>
-    <a class="link" href="https://youtube.com/@alpha_fortnite-l5u?si=1E02OfGAw21mn4E9" target="_blank">🎮 YouTube — Chaîne Fortnite</a>
-    <a class="link" href="https://youtube.com/@alpha_games30?si=_slgcvNo_UiZhZKO" target="_blank">🕹️ YouTube — Gaming aléatoire</a>
-    <a class="link" href="https://www.instagram.com/alpha_game30?igsh=OTMzcG9ueGNhdTEw" target="_blank">📸 Instagram</a>
-    <a class="link" href="https://open.spotify.com/user/31k5ajlsqnxhd3glj3bbc5iirq5i?si=iizxRCU9SeS3wqzL4d0mIQ" target="_blank">🎵 Spotify</a>
-    <a class="link" href="https://www.tiktok.com/@edonis5911?_r=1&_t=ZG-93x6VX3UYBE" target="_blank">🎶 TikTok</a>
-    <a class="link" href="https://discord.gg/DBgCn5MxAQ" target="_blank">💬 Discord (serveur)</a>
-    <a class="link" href="mailto:alpha.ytb.contact.me@gmail.com">📨 E-mail : alpha.ytb.contact.me@gmail.com</a>
-
-    <div class="info">
-      👤 Discord (moi) : alpha_gaming30<br>
-      <button onclick="copyText('alpha_gaming30')">Copier</button>
-    </div>
-
-    <div class="info">
-      🎮 Pokémon GO : 663406890740<br>
-      <button onclick="copyText('663406890740')">Copier</button>
-    </div>
-  </div>
-
-  <script>
-    function copyText(text) {
-      navigator.clipboard.writeText(text);
-      alert('Copié : ' + text);
-    }
-  </script>
-</body>
-</html>

@@ -90,6 +90,20 @@ button {
   z-index: 9999;
 }
 
+@keyframes glitch {
+  0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+  50% { text-shadow: -2px 0 red, 2px 0 cyan; }
+  100% { text-shadow: 2px 0 red, -2px 0 cyan; }
+}
+
+@keyframes shake {
+  0% { transform: translate(2px, 2px); }
+  25% { transform: translate(-2px, -2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+  
 #overlay img {
   max-width: 100%;
   max-height: 100%;
@@ -179,6 +193,49 @@ if (!lastVisit || now - lastVisit > 86400000) {
 }
 document.getElementById("views").textContent = views;
 
+const konami = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+let kIndex = 0;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === konami[kIndex]) {
+    kIndex++;
+    if (kIndex === konami.length) {
+      document.querySelector("h1").style.animation = "glitch 0.2s infinite";
+      kIndex = 0;
+    }
+  } else {
+    kIndex = 0;
+  }
+
+let holdTimer;
+
+avatar.addEventListener("mousedown", () => {
+  holdTimer = setTimeout(() => {
+    document.body.style.filter = "invert(1) hue-rotate(180deg)";
+  }, 3000);
+});
+
+avatar.addEventListener("mouseup", () => {
+  clearTimeout(holdTimer);
+});
+
+avatar.addEventListener("touchstart", () => {
+  holdTimer = setTimeout(() => {
+    document.body.style.filter = "invert(1) hue-rotate(180deg)";
+  }, 3000);
+});
+
+avatar.addEventListener("touchend", () => {
+  clearTimeout(holdTimer);
+}
+                        
+const title = document.querySelector("h1");
+
+title.addEventListener("dblclick", () => {
+  document.body.style.animation = "shake 0.1s 10";
+  setTimeout(() => document.body.style.animation = "", 1000);
+}
+                       
 /* ===== EASTER EGG ARC-EN-CIEL ===== */
 let clicks = 0;
 const avatar = document.getElementById("avatar");

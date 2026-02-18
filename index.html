@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alpha Gaming - Mes liens</title>
+<title>Alpha Gaming</title>
 
 <style>
 body {
@@ -14,12 +14,21 @@ body {
   display: flex;
   justify-content: center;
   padding: 20px;
-  animation: pulseBg 6s infinite alternate;
+  transition: background 0.6s;
 }
 
-@keyframes pulseBg {
-  from { background: radial-gradient(circle at top, #6a00ff, #000); }
-  to   { background: radial-gradient(circle at top, #a855ff, #000); }
+body.rainbow {
+  background: linear-gradient(
+    270deg,
+    red, orange, yellow, green, cyan, blue, violet
+  );
+  background-size: 1400% 1400%;
+  animation: rainbow 8s linear infinite;
+}
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 .container {
@@ -34,17 +43,11 @@ body {
   border-radius: 50%;
   border: 3px solid #a855ff;
   box-shadow: 0 0 20px #a855ff;
-  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 h1 {
-  margin: 10px 0 5px;
   text-shadow: 0 0 20px #a855ff;
-}
-
-p {
-  color: #ccc;
-  margin-bottom: 20px;
 }
 
 .link, .info {
@@ -55,12 +58,6 @@ p {
   color: white;
   text-decoration: none;
   display: block;
-  transition: 0.2s;
-}
-
-.link:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #a855ff;
 }
 
 button {
@@ -70,16 +67,7 @@ button {
   padding: 8px 14px;
   color: white;
   cursor: pointer;
-  margin: 6px;
-  box-shadow: 0 0 12px #7f00ff;
-}
-
-button:hover {
-  background: #a855ff;
-}
-
-.music-controls {
-  margin-bottom: 20px;
+  margin-top: 8px;
 }
 
 .views {
@@ -87,8 +75,24 @@ button:hover {
   bottom: 10px;
   right: 15px;
   font-size: 13px;
+  cursor: pointer;
   opacity: 0.85;
-  text-shadow: 0 0 10px #a855ff;
+}
+
+/* IMAGE PLEIN ÉCRAN */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#overlay img {
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>
 </head>
@@ -96,23 +100,21 @@ button:hover {
 <body>
 
 <div class="container">
-  <img src="https://i.imgur.com/LEoFjmn.jpeg" class="avatar">
+  <img src="https://i.imgur.com/LEoFjmn.jpeg" class="avatar" id="avatar">
   <h1>Alpha Gaming</h1>
   <p>Mes réseaux et liens officiels</p>
 
-  <div class="music-controls">
-    <button onclick="toggleMusic()">▶️ / ⏸ Musique</button>
-    <button onclick="changeMusic()">🔁 Changer</button>
-  </div>
+  <button onclick="toggleMusic()">▶️ / ⏸ Musique</button>
+  <button onclick="changeMusic()">🔁 Changer</button>
 
-  <a class="link" href="https://youtube.com/@alpha_roblox-v6o?si=akPvJJR0dHIpiiTi" target="_blank">🎥 YouTube — Chaîne Roblox</a>
-  <a class="link" href="https://youtube.com/@alpha_fortnite-l5u?si=1E02OfGAw21mn4E9" target="_blank">🎮 YouTube — Chaîne Fortnite</a>
-  <a class="link" href="https://youtube.com/@alpha_games30?si=_slgcvNo_UiZhZKO" target="_blank">🕹️ YouTube — Gaming aléatoire</a>
+  <a class="link" href="https://youtube.com/@alpha_roblox-v6o?si=akPvJJR0dHIpiiTi" target="_blank">🎥 YouTube — Roblox</a>
+  <a class="link" href="https://youtube.com/@alpha_fortnite-l5u?si=1E02OfGAw21mn4E9" target="_blank">🎮 YouTube — Fortnite</a>
+  <a class="link" href="https://youtube.com/@alpha_games30?si=_slgcvNo_UiZhZKO" target="_blank">🕹️ YouTube — Gaming</a>
   <a class="link" href="https://www.instagram.com/alpha_game30?igsh=OTMzcG9ueGNhdTEw" target="_blank">📸 Instagram</a>
   <a class="link" href="https://open.spotify.com/user/31k5ajlsqnxhd3glj3bbc5iirq5i?si=iizxRCU9SeS3wqzL4d0mIQ" target="_blank">🎵 Spotify</a>
   <a class="link" href="https://www.tiktok.com/@edonis5911?_r=1&_t=ZG-93x6VX3UYBE" target="_blank">🎶 TikTok</a>
   <a class="link" href="https://discord.gg/DBgCn5MxAQ" target="_blank">💬 Discord (serveur)</a>
-  <a class="link" href="mailto:alpha.ytb.contact.me@gmail.com">📨 E-mail : alpha.ytb.contact.me@gmail.com</a>
+  <a class="link" href="mailto:alpha.ytb.contact.me@gmail.com">📨 E-mail</a>
 
   <div class="info">
     👤 Discord (moi) : <strong>alpha_gaming30</strong><br>
@@ -125,8 +127,12 @@ button:hover {
   </div>
 </div>
 
-<div class="views">
+<div class="views" id="viewsBox">
   👁️ Vues : <span id="views"></span>
+</div>
+
+<div id="overlay">
+  <img id="overlayImg">
 </div>
 
 <audio id="music" loop></audio>
@@ -144,39 +150,61 @@ const musics = [
   "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Corporate__Motivational_Music/Scott_Holmes_Music_-_Upbeat_Party.mp3"
 ];
 
-let index = 0;
+let musicIndex = 0;
 const audio = document.getElementById("music");
-audio.src = musics[index];
+audio.src = musics[musicIndex];
 audio.volume = 0.5;
 
 function toggleMusic() {
-  if (audio.paused) {
-    audio.play().catch(() => alert("Clique sur le bouton pour lancer la musique"));
-  } else {
-    audio.pause();
-  }
+  audio.paused
+    ? audio.play().catch(() => alert("Clique sur le bouton pour autoriser la musique"))
+    : audio.pause();
 }
 
 function changeMusic() {
-  index = (index + 1) % musics.length;
-  audio.src = musics[index];
+  musicIndex = (musicIndex + 1) % musics.length;
+  audio.src = musics[musicIndex];
   audio.play();
 }
 
-/* ===== COMPTEUR DE VUES 24H ===== */
+/* ===== VUES 24H ===== */
 const now = Date.now();
 const lastVisit = localStorage.getItem("last_visit");
-let views = localStorage.getItem("alpha_views");
+let views = localStorage.getItem("alpha_views") || 0;
 
-views = views ? parseInt(views) : 0;
-
-if (!lastVisit || now - lastVisit > 24 * 60 * 60 * 1000) {
+if (!lastVisit || now - lastVisit > 86400000) {
   views++;
   localStorage.setItem("alpha_views", views);
   localStorage.setItem("last_visit", now);
 }
-
 document.getElementById("views").textContent = views;
+
+/* ===== EASTER EGG ARC-EN-CIEL ===== */
+let clicks = 0;
+const avatar = document.getElementById("avatar");
+
+avatar.addEventListener("click", () => {
+  clicks++;
+  setTimeout(() => clicks = 0, 800);
+  if (clicks === 3) {
+    document.body.classList.toggle("rainbow");
+  }
+});
+
+/* ===== IMAGE PLEIN ÉCRAN ===== */
+const secretImageURL = "http://www.image-heberg.fr/files/17714474692689074260.jpg";
+
+const overlay = document.getElementById("overlay");
+const overlayImg = document.getElementById("overlayImg");
+
+document.getElementById("viewsBox").addEventListener("click", () => {
+  overlayImg.src = secretImageURL;
+  overlay.style.display = "flex";
+});
+
+overlay.addEventListener("click", () => {
+  overlay.style.display = "none";
+});
 </script>
 
 </body>

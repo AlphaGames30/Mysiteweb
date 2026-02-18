@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alpha Gaming - Mes Liens</title>
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #111, #000);
+      background: radial-gradient(circle at top, #6a00ff, #000);
       color: white;
       display: flex;
       justify-content: center;
@@ -29,11 +30,152 @@
       border-radius: 50%;
       object-fit: cover;
       margin: auto;
-      border: 3px solid #444;
+      border: 3px solid #a855ff;
+      box-shadow: 0 0 20px #a855ff;
     }
 
-    h1 { margin: 10px 0 5px; }
-    p { color: #aaa; margin-bottom: 25px; }
+    h1 {
+      margin: 10px 0 5px;
+      text-shadow: 0 0 15px #a855ff;
+    }
+
+    p {
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .link {
+      display: block;
+      background: #1f1f1f;
+      border-radius: 14px;
+      padding: 14px;
+      margin: 10px 0;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      font-size: 16px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #a855ff;
+      background: #2a2a2a;
+    }
+
+    .info {
+      background: #1f1f1f;
+      border-radius: 14px;
+      padding: 14px;
+      margin: 10px 0;
+      box-shadow: 0 0 15px #000;
+    }
+
+    button {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 10px;
+      background: #7f00ff;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 15px #7f00ff;
+    }
+
+    button:hover {
+      background: #a855ff;
+    }
+
+    /* 🎵 MUSIQUE */
+    .music-controls {
+      margin: 20px 0;
+    }
+
+    /* 👁️ VUES */
+    .views {
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+      font-size: 13px;
+      opacity: 0.85;
+      text-shadow: 0 0 10px #a855ff;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <img src="https://i.imgur.com/LEoFjmn.jpeg" class="avatar" />
+  <h1>Alpha Gaming</h1>
+  <p>Mes réseaux et liens officiels</p>
+
+  <div class="music-controls">
+    <button onclick="toggleMusic()">▶️ / ⏸ Musique</button>
+    <button onclick="changeMusic()">🔁 Changer</button>
+  </div>
+
+  <a class="link" href="https://youtube.com/@alpha_roblox-v6o" target="_blank">🎥 YouTube — Roblox</a>
+  <a class="link" href="https://youtube.com/@alpha_fortnite-l5u" target="_blank">🎮 YouTube — Fortnite</a>
+  <a class="link" href="https://youtube.com/@alpha_games30" target="_blank">🕹️ YouTube — Gaming</a>
+  <a class="link" href="https://www.instagram.com/alpha_game30" target="_blank">📸 Instagram</a>
+  <a class="link" href="https://open.spotify.com" target="_blank">🎵 Spotify</a>
+  <a class="link" href="https://www.tiktok.com/@edonis5911" target="_blank">🎶 TikTok</a>
+  <a class="link" href="https://discord.gg/DBgCn5MxAQ" target="_blank">💬 Discord</a>
+  <a class="link" href="mailto:alpha.ytb.contact.me@gmail.com">📨 Email</a>
+
+  <div class="info">
+    👤 Discord : alpha_gaming30<br>
+    <button onclick="copyText('alpha_gaming30')">Copier</button>
+  </div>
+
+  <div class="info">
+    🎮 Pokémon GO : 663406890740<br>
+    <button onclick="copyText('663406890740')">Copier</button>
+  </div>
+</div>
+
+<div class="views">
+  👁️ Vues : <span id="viewsCount"></span>
+</div>
+
+<audio id="music" loop></audio>
+
+<script>
+  function copyText(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copié : " + text);
+  }
+
+  // 🎵 PLAYLIST
+  const musics = [
+    "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Technology__Innovation/Scott_Holmes_Music_-_Corporate_Innovation.mp3",
+    "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Corporate__Motivational_Music/Scott_Holmes_Music_-_Upbeat_Party.mp3"
+  ];
+
+  let index = 0;
+  const audio = document.getElementById("music");
+  audio.src = musics[index];
+
+  function toggleMusic() {
+    audio.paused ? audio.play() : audio.pause();
+  }
+
+  function changeMusic() {
+    index = (index + 1) % musics.length;
+    audio.src = musics[index];
+    audio.play();
+  }
+
+  // 👁️ COMPTEUR DE VUES
+  let views = localStorage.getItem("alpha_views");
+  views = views ? parseInt(views) + 1 : 1;
+  localStorage.setItem("alpha_views", views);
+  document.getElementById("viewsCount").textContent = views;
+</script>
+
+</body>
+</html>
 
     .link {
       display: block;

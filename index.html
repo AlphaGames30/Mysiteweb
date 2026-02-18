@@ -151,27 +151,48 @@ button {
 
 <audio id="music" loop></audio>
 
-<script>
-/* ===== COPIE ===== */
+<<script>
+
+/* ============================= */
+/* ====== SETUP GLOBAL ========= */
+/* ============================= */
+
+const avatar = document.getElementById("avatar");
+const title = document.querySelector("h1");
+const overlay = document.getElementById("overlay");
+const overlayImg = document.getElementById("overlayImg");
+const viewsBox = document.getElementById("viewsBox");
+const audio = document.getElementById("music");
+
+/* ============================= */
+/* ===== COPIE ================= */
+/* ============================= */
+
 function copyText(text) {
   navigator.clipboard.writeText(text);
   alert("Copié : " + text);
 }
 
-/* ===== MUSIQUE ===== */
+document.addEventListener("copy", () => {
+  alert("📋 Tu copies mes secrets ?");
+});
+
+/* ============================= */
+/* ===== MUSIQUE =============== */
+/* ============================= */
+
 const musics = [
   "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Technology__Innovation/Scott_Holmes_Music_-_Corporate_Innovation.mp3",
   "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Corporate__Motivational_Music/Scott_Holmes_Music_-_Upbeat_Party.mp3"
 ];
 
 let musicIndex = 0;
-const audio = document.getElementById("music");
 audio.src = musics[musicIndex];
 audio.volume = 0.5;
 
 function toggleMusic() {
   audio.paused
-    ? audio.play().catch(() => alert("Clique sur le bouton pour autoriser la musique"))
+    ? audio.play().catch(() => alert("Clique pour autoriser la musique"))
     : audio.pause();
 }
 
@@ -180,6 +201,10 @@ function changeMusic() {
   audio.src = musics[musicIndex];
   audio.play();
 }
+
+/* ============================= */
+/* ===== SCROLL SECRET ========= */
+/* ============================= */
 
 let scrollCount = 0;
 let scrollTimer;
@@ -197,6 +222,10 @@ window.addEventListener("wheel", () => {
   }
 });
 
+/* ============================= */
+/* ===== TAP MOBILE ============ */
+/* ============================= */
+
 let taps = 0;
 let tapTimer;
 
@@ -207,12 +236,16 @@ document.body.addEventListener("touchstart", () => {
   tapTimer = setTimeout(() => taps = 0, 600);
 
   if (taps === 3) {
-    if (navigator.vibrate) navigator.vibrate(200);
+    navigator.vibrate?.(200);
     document.body.style.backgroundColor = "#fff";
     setTimeout(() => document.body.style.backgroundColor = "", 150);
     taps = 0;
   }
 });
+
+/* ============================= */
+/* ===== IDLE MODE ============= */
+/* ============================= */
 
 let idleTimer;
 
@@ -223,15 +256,9 @@ document.addEventListener("mousemove", () => {
   }, 5000);
 });
 
-let godMode = 0;
-
-function unlockGodMode() {
-  godMode++;
-  if (godMode === 3) {
-    alert("🔥 MODE DIEU ACTIVÉ 🔥");
-    document.body.style.animation = "rainbow 3s linear infinite";
-  }
-}
+/* ============================= */
+/* ===== MOT SECRET ALPHA ====== */
+/* ============================= */
 
 const secretWord = ["a","l","p","h","a"];
 let wordIndex = 0;
@@ -241,14 +268,96 @@ document.addEventListener("keydown", e => {
     wordIndex++;
     if (wordIndex === secretWord.length) {
       document.body.style.boxShadow = "inset 0 0 200px #a855ff";
+      setTimeout(() => document.body.style.boxShadow = "", 3000);
       wordIndex = 0;
     }
   } else {
     wordIndex = 0;
   }
 });
-  
-/* ===== VUES 24H ===== */
+
+/* ============================= */
+/* ===== KONAMI CODE =========== */
+/* ============================= */
+
+const konami = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+let kIndex = 0;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === konami[kIndex]) {
+    kIndex++;
+    if (kIndex === konami.length) {
+      title.style.animation = "glitch 0.2s infinite";
+      setTimeout(() => title.style.animation = "", 4000);
+      kIndex = 0;
+    }
+  } else {
+    kIndex = 0;
+  }
+});
+
+/* ============================= */
+/* ===== TRIPLE CLIC AVATAR ==== */
+/* ============================= */
+
+let clicks = 0;
+
+avatar.addEventListener("click", () => {
+  clicks++;
+  setTimeout(() => clicks = 0, 800);
+  if (clicks === 3) {
+    document.body.classList.toggle("rainbow");
+  }
+});
+
+/* ============================= */
+/* ===== MAINTIEN AVATAR ======= */
+/* ============================= */
+
+let holdTimer;
+
+avatar.addEventListener("mousedown", () => {
+  holdTimer = setTimeout(() => {
+    document.body.style.filter = "invert(1) hue-rotate(180deg)";
+  }, 3000);
+});
+
+avatar.addEventListener("mouseup", () => clearTimeout(holdTimer));
+avatar.addEventListener("touchstart", () => {
+  holdTimer = setTimeout(() => {
+    document.body.style.filter = "invert(1) hue-rotate(180deg)";
+  }, 3000);
+});
+avatar.addEventListener("touchend", () => clearTimeout(holdTimer));
+
+/* ============================= */
+/* ===== DOUBLE CLIC TITRE ===== */
+/* ============================= */
+
+title.addEventListener("dblclick", () => {
+  document.body.style.animation = "shake 0.1s 10";
+  setTimeout(() => document.body.style.animation = "", 1000);
+});
+
+/* ============================= */
+/* ===== IMAGE SECRÈTE ========= */
+/* ============================= */
+
+const secretImageURL = "https://www.image-heberg.fr/files/17714474692689074260.jpg";
+
+viewsBox.addEventListener("click", () => {
+  overlayImg.src = secretImageURL;
+  overlay.style.display = "flex";
+});
+
+overlay.addEventListener("click", () => {
+  overlay.style.display = "none";
+});
+
+/* ============================= */
+/* ===== VUES 24H ============== */
+/* ============================= */
+
 const now = Date.now();
 const lastVisit = localStorage.getItem("last_visit");
 let views = localStorage.getItem("alpha_views") || 0;
@@ -260,82 +369,91 @@ if (!lastVisit || now - lastVisit > 86400000) {
 }
 document.getElementById("views").textContent = views;
 
-const konami = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
-let kIndex = 0;
+/* ============================= */
+/* ===== GOD MODE (g o d) ====== */
+/* ============================= */
+
+const godCode = ["g","o","d"];
+let godIndex = 0;
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === konami[kIndex]) {
-    kIndex++;
-    if (kIndex === konami.length) {
-      document.querySelector("h1").style.animation = "glitch 0.2s infinite";
-      kIndex = 0;
+  if (e.key.toLowerCase() === godCode[godIndex]) {
+    godIndex++;
+    if (godIndex === godCode.length) {
+      document.body.classList.add("rainbow");
+      title.style.animation = "glitch 0.2s infinite";
+      audio.volume = 1;
+      setTimeout(() => title.style.animation = "", 4000);
+      godIndex = 0;
     }
   } else {
-    kIndex = 0;
-  }
-
-let holdTimer;
-
-avatar.addEventListener("mousedown", () => {
-  holdTimer = setTimeout(() => {
-    document.body.style.filter = "invert(1) hue-rotate(180deg)";
-  }, 3000);
-});
-
-avatar.addEventListener("mouseup", () => {
-  clearTimeout(holdTimer);
-});
-
-avatar.addEventListener("touchstart", () => {
-  holdTimer = setTimeout(() => {
-    document.body.style.filter = "invert(1) hue-rotate(180deg)";
-  }, 3000);
-});
-
-avatar.addEventListener("touchend", () => {
-  clearTimeout(holdTimer);
-}
-                        
-const title = document.querySelector("h1");
-
-title.addEventListener("dblclick", () => {
-  document.body.style.animation = "shake 0.1s 10";
-  setTimeout(() => document.body.style.animation = "", 1000);
-}
-                       
-/* ===== EASTER EGG ARC-EN-CIEL ===== */
-let clicks = 0;
-const avatar = document.getElementById("avatar");
-
-avatar.addEventListener("click", () => {
-  clicks++;
-  setTimeout(() => clicks = 0, 800);
-  if (clicks === 3) {
-    document.body.classList.toggle("rainbow");
+    godIndex = 0;
   }
 });
 
-/* ===== IMAGE PLEIN ÉCRAN ===== */
-const secretImageURL = "http://www.image-heberg.fr/files/17714474692689074260.jpg";
+/* ============================= */
+/* ===== CHAOS MODE ============ */
+/* ============================= */
 
-const overlay = document.getElementById("overlay");
-const overlayImg = document.getElementById("overlayImg");
-
-document.getElementById("viewsBox").addEventListener("click", () => {
-  overlayImg.src = secretImageURL;
-  overlay.style.display = "flex";
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "a") {
+    document.body.style.animation = "shake 0.05s infinite";
+    document.body.classList.add("rainbow");
+  }
 });
 
-overlay.addEventListener("click", () => {
-  overlay.style.display = "none";
+/* ============================= */
+/* ===== CODE 777 ============== */
+/* ============================= */
+
+let numCode = "";
+
+document.addEventListener("keydown", (e) => {
+  if (!isNaN(e.key)) {
+    numCode += e.key;
+    if (numCode.endsWith("777")) {
+      alert("🎰 JACKPOT SECRET 🎰");
+      document.body.classList.add("rainbow");
+      setTimeout(() => document.body.classList.remove("rainbow"), 5000);
+      numCode = "";
+    }
+  }
 });
+
+/* ============================= */
+/* ===== 100 CLICS ============= */
+/* ============================= */
+
+let totalClicks = 0;
+
+document.addEventListener("click", () => {
+  totalClicks++;
+  if (totalClicks === 100) {
+    alert("💎 100 CLICS DÉBLOQUÉS 💎");
+  }
+});
+
+/* ============================= */
+/* ===== SCREENSHOT FUN ======== */
+/* ============================= */
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "PrintScreen") {
+    alert("📸 Screenshot détecté...");
+  }
+});
+
+/* ============================= */
+/* ===== MINUIT SECRET ========= */
+/* ============================= */
 
 const nowTime = new Date();
 if (nowTime.getHours() === 0 && nowTime.getMinutes() <= 5) {
   console.log("👁️ Tu n’étais pas censé être là...");
 }
-  
-</script>
 
+console.log("%c🔥 Bienvenue Hacker 🔥", "color:red; font-size:18px;");
+
+</script>
 </body>
 </html>
